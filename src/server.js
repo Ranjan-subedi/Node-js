@@ -1,7 +1,10 @@
+// Initialization
+
 const express = require('express');
 app = express();
 
 const mongoose = require('mongoose');
+
 mongoose.connect("mongodb+srv://ranjansubedi:ranjansubedi@cluster0.ud6gaz6.mongodb.net/?appName=Cluster0").then(function(){
     
     // Home route (/)
@@ -23,7 +26,7 @@ mongoose.connect("mongodb+srv://ranjansubedi:ranjansubedi@cluster0.ud6gaz6.mongo
 
 });
 
-
+// Starting the server on the mentioned server port
 
 app.listen(4000,function(){
     console.log("server is running on port 4000");
