@@ -4,6 +4,8 @@ const express = require('express');
 app = express();
 
 const mongoose = require('mongoose');
+const Note = require("./models/Note");
+
 
 mongoose.connect("mongodb+srv://ranjansubedi:ranjansubedi@cluster0.ud6gaz6.mongodb.net/?appName=Cluster0").then(function(){
     
@@ -11,9 +13,27 @@ mongoose.connect("mongodb+srv://ranjansubedi:ranjansubedi@cluster0.ud6gaz6.mongo
     app.get("/",function(req,res){
         res.send("Hello World done mongoose connection");
     });
+
+    // Add new Note to the Database
+    app.get("/Notes/add",async function(req, res){
+        var addNote = new Note({
+            id : "197",
+            userid : 'ranjan02',
+            title : "First Note testing",
+            content : 'just trying to test mongooes database'
+        });
+        await addNote.save();
+        const response = {
+            message : "New Note has been added !",
+            timeOfAdded : Date.now(),     
+        };
+        res.json(response);
+    });
     
-    app.get("/homepage",function(req,res){
-        res.send("Homepage section");
+    // Show the notes from Databases
+    app.get("/NotesList",async function(req,res){
+         var notes = await Note.find();
+         res.json(notes);
     });
     
     app.get("/about",function(req,res){
