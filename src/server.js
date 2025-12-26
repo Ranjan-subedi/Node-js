@@ -6,6 +6,10 @@ app = express();
 const mongoose = require('mongoose');
 const Note = require("./models/Note");
 
+const body_parser = require("body-parser");
+app.use(body_parser.urlencoded({extendent : false}));
+app.use(body_parser.json());
+
 
 mongoose.connect("mongodb+srv://ranjansubedi:ranjansubedi@cluster0.ud6gaz6.mongodb.net/?appName=Cluster0").then(function(){
     
@@ -15,24 +19,27 @@ mongoose.connect("mongodb+srv://ranjansubedi:ranjansubedi@cluster0.ud6gaz6.mongo
     });
 
     // Add new Note to the Database
-    app.get("/Notes/add",async function(req, res){
-        var addNote = new Note({
-            id : "197",
-            userid : 'ranjan02',
-            title : "First Note testing",
-            content : 'just trying to test mongooes database'
-        });
-        await addNote.save();
-        const response = {
-            message : "New Note has been added !",
-            timeOfAdded : Date.now(),     
-        };
-        res.json(response);
+    app.post("/Notes/add",async function(req, res){
+
+        res.json(req.body);
+
+        // var addNote = new Note({
+        //     id : "197",
+        //     userid : 'ranjan02',
+        //     title : "First Note testing",
+        //     content : 'just trying to test mongooes database'
+        // });
+        // await addNote.save();
+        // const response = {
+        //     message : "New Note has been added !",
+        //     timeOfAdded : Date.now(),     
+        // };
+        // res.json(response);
     });
     
     // Show the notes from Databases
-    app.get("/NotesList",async function(req,res){
-         var notes = await Note.find();
+    app.get("/NotesList/:userid",async function(req,res){
+         var notes = await Note.find({userid : req.params.userid });
          res.json(notes);
     });
     
