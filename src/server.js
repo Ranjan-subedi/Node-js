@@ -1,14 +1,17 @@
 // Initialization
 
 const express = require('express');
-app = express();
+const app = express();
 
 const mongoose = require('mongoose');
 const Note = require("./models/Note");
 
-const body_parser = require("body-parser");
-app.use(body_parser.urlencoded({extendent : false}));
-app.use(body_parser.json());
+// const body_parser = require("body-parser");
+app.use(express.json());
+app.use(express.urlencoded({extended : false}));
+// app.use(body_parser.json());
+
+
 
 
 mongoose.connect("mongodb+srv://ranjansubedi:ranjansubedi@cluster0.ud6gaz6.mongodb.net/?appName=Cluster0").then(function(){
@@ -19,9 +22,14 @@ mongoose.connect("mongodb+srv://ranjansubedi:ranjansubedi@cluster0.ud6gaz6.mongo
     });
 
     // Add new Note to the Database
-    app.post("/Notes/add",async function(req, res){
+    app.post("/Notes/add" ,async function(req, res){
 
-        res.json(req.body);
+        // res.json(req.body);
+        console.log("received data :",req.body);
+        res.json({
+            message: "Sucess",
+            received: req.body
+        });
 
         // var addNote = new Note({
         //     id : "197",
