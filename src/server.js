@@ -24,25 +24,26 @@ mongoose.connect("mongodb+srv://ranjansubedi:ranjansubedi@cluster0.ud6gaz6.mongo
     // Add new Note to the Database
     app.post("/Notes/add" ,async function(req, res){
 
-        // res.json(req.body);
-        console.log("received data :",req.body);
-        res.json({
-            message: "Sucess",
-            received: req.body
+        // console.log("received data :",req.body);
+        // res.json({
+        //     message: "Sucess",
+        //     received: req.body
+        // });
+
+        var addNote = new Note({
+            id : req.body.id,
+            userid : req.body.userid,
+            title : req.body.title,
+            content : req.body.content
         });
 
-        // var addNote = new Note({
-        //     id : "197",
-        //     userid : 'ranjan02',
-        //     title : "First Note testing",
-        //     content : 'just trying to test mongooes database'
-        // });
-        // await addNote.save();
-        // const response = {
-        //     message : "New Note has been added !",
-        //     timeOfAdded : Date.now(),     
-        // };
-        // res.json(response);
+        await addNote.save();
+
+        const response = {
+            message : "New Note has been added !"+ `id : ${req.body.id}`,
+            timeOfAdded : Date.now(),     
+        };
+        res.json(response);
     });
     
     // Show the notes from Databases
