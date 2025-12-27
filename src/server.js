@@ -39,7 +39,7 @@ mongoose.connect(database_url).then(function(){
 });
 
 // Starting the server on the mentioned server port
-
-app.listen(4000,function(){
-    console.log("server is running on port 4000");
+const PORT = process.env.PORT || 4000;
+app.listen(PORT ,function(){
+    console.log("server is running on port: "+PORT);
 });
