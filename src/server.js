@@ -33,7 +33,7 @@ mongoose.connect(database_url).then(function(){
     
 
     app.get("/contact",function(req,res){
-        req.send("Frrom contact section of the website")
+        req.send("From contact section of the website")
     });
 
 });
