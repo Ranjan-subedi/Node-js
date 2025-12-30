@@ -17,7 +17,7 @@ const database_url = "mongodb+srv://ranjansubedi:ranjansubedi@cluster0.ud6gaz6.m
 mongoose.connect(database_url).then(function(){
     // Home route (/)
     app.get("/",function(req,res){
-        const response = { message : "Api fetched succcessfully !!",
+        const response = { message : "Api fetched successfully !!",
             nested: {
                 first : "hello",
                 second : "world"
@@ -33,7 +33,7 @@ mongoose.connect(database_url).then(function(){
     
 
     app.get("/contact",function(req,res){
-        req.send("From contact section of the website")
+        res.send("From contact section of the website")
     });
 
 });
@@ -41,5 +41,5 @@ mongoose.connect(database_url).then(function(){
 // Starting the server on the mentioned server port
 const PORT = process.env.PORT || 4000;
 app.listen(PORT ,function(){
-    console.log("server is running on port: "+PORT);
+    console.log("server is running on port : "+PORT);
 });
