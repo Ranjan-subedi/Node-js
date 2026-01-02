@@ -49,7 +49,9 @@ const Note = require('./../models/Note');
     // Show the notes from Databases
     router.post("/list",async function(req,res){
         try {
-             var notes = await Note.find({userid : req.body.userid});
+             var notes = await Note.find(
+                {userid : req.body.userid}
+            );
              console.log(notes);
              res.status(200).json(notes);
         } catch (error) {
